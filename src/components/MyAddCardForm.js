@@ -6,8 +6,6 @@ import { addLaneCard } from 'redux/lane/action';
 
 const MyAddCardForm = (props) => {
 
-  console.log("props", props)
-
   const { register, handleSubmit, formState: { errors } } = useForm();
   const dispatch = useDispatch()
 

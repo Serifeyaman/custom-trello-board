@@ -35,6 +35,11 @@ const laneReducer = (state = initialState, action) => {
         ...state,
         lanesArray: action.data
       };
+    case 'DELETE_LANE':
+      return {
+        ...state,
+        lanesArray: action.data
+      };
     case 'ADD_LANE_CARD':
       return {
         ...state,

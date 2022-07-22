@@ -1,6 +1,12 @@
-export const addLaneX = (lane,data) => {
+export const addLaneX = (lane, data) => {
     lane.push(data)
-    console.log("lane",lane)
+    return lane
+}
+
+export const deleteLaneX = (lane, laneId) => {
+    let findlane = lane.find(p => p.id === laneId)
+    var index = lane.indexOf(findlane)
+    lane.splice(index, 1)
     return lane
 }
 

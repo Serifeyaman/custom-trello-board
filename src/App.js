@@ -25,7 +25,7 @@ const App = () => {
         // GlobalStyle: MyGlobalStyle, 
         // Card: MyCard,
         NewLaneForm: (props) => MyLaneForm({ ...props, lanesArray: lanesArray }),
-        LaneHeader: (props) => MyLaneHeader({ ...props }),
+        LaneHeader: (props) => MyLaneHeader({ ...props, lanesArray: lanesArray  }),
         AddCardLink: (props) => MyAddCardLink({ ...props }),
         NewCardForm: (props) => MyAddCardForm({ ...props, lanesArray: lanesArray })
       }}
