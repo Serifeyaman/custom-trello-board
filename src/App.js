@@ -1,5 +1,6 @@
 import MyAddCardForm from 'components/MyAddCardForm';
 import MyAddCardLink from 'components/MyAddCardLink';
+import MyLaneForm from 'components/MyLaneForm';
 import MyLaneHeader from 'components/MyLaneHeader';
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,11 +20,11 @@ const App = () => {
       draggable
       editable
       cardDraggable
-      canAddLanes 
+      canAddLanes
       components={{
         // GlobalStyle: MyGlobalStyle, 
-        // NewLaneForm: (props) => ({ ...props }),
         // Card: MyCard,
+        NewLaneForm: (props) => MyLaneForm({ ...props, lanesArray: lanesArray }),
         LaneHeader: (props) => MyLaneHeader({ ...props }),
         AddCardLink: (props) => MyAddCardLink({ ...props }),
         NewCardForm: (props) => MyAddCardForm({ ...props, lanesArray: lanesArray })

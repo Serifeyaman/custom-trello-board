@@ -1,4 +1,4 @@
-import { addLaneCardX } from "services/LaneService"
+import { addLaneCardX, addLaneX } from "services/LaneService"
 
 export const getLanes = () => {
     return dispatch =>
@@ -7,11 +7,20 @@ export const getLanes = () => {
         })
 }
 
+export const addLane = (state, payload) => {
+    let lane = addLaneX(state, payload)
+    return dispatch =>
+        dispatch({
+            type: 'ADD_LANE',
+            data: lane
+        })
+}
+
 export const addLaneCard = (state, payload) => {
-    let deger = addLaneCardX(state, payload.id, payload)
+    let card = addLaneCardX(state, payload.id, payload)
     return dispatch =>
         dispatch({
             type: 'ADD_LANE_CARD',
-            data: deger
+            data: card
         })
 }

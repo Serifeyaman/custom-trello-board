@@ -1,7 +1,7 @@
 const initialState = {
   lanesArray: [
     {
-      id: 'To-Do',
+      id: '1',
       title: 'To-Do',
       label: '2/2',
       cards: [
@@ -9,13 +9,13 @@ const initialState = {
       ]
     },
     {
-      id: 'Doing',
+      id: '2',
       title: 'Doing',
       label: '0/0',
       cards: []
     },
     {
-      id: 'Done',
+      id: '3',
       title: 'Done',
       label: '0/0',
       cards: []
@@ -29,6 +29,11 @@ const laneReducer = (state = initialState, action) => {
       return {
         ...state,
         lanesArray: state.lanesArray
+      };
+    case 'ADD_LANE':
+      return {
+        ...state,
+        lanesArray: action.data
       };
     case 'ADD_LANE_CARD':
       return {
