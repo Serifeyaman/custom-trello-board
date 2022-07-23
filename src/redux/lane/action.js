@@ -1,4 +1,4 @@
-import { addLaneCardX, addLaneX, deleteLaneX } from "services/LaneService"
+import { addLaneCardX, addLaneX, deleteLaneX, updateLaneHeaderX } from "services/LaneService"
 
 export const getLanes = () => {
     return dispatch =>
@@ -16,6 +16,15 @@ export const addLane = (state, payload) => {
         })
 }
 
+export const updateLaneHeader = (state, payload) => {
+    let lane = updateLaneHeaderX(state, payload)
+    return dispatch =>
+        dispatch({
+            type: 'UPDATE_LANE',
+            updateData: lane
+        })
+}
+
 export const deleteLane = (state, laneId) => {
     let lane = deleteLaneX(state, laneId)
     return dispatch =>
@@ -25,11 +34,20 @@ export const deleteLane = (state, laneId) => {
         })
 }
 
-export const addLaneCard = (state, payload) => {
-    let card = addLaneCardX(state, payload.id, payload)
+export const addLaneCard = (state,laneId, payload) => {
+    let card = addLaneCardX(state, laneId, payload)
     return dispatch =>
         dispatch({
             type: 'ADD_LANE_CARD',
+            data: card
+        })
+}
+
+export const deleteLaneCard = (state, cardId) => {
+    let card = deleteLaneX(state, cardId)
+    return dispatch =>
+        dispatch({
+            type: 'DELETE_LANE_CARD',
             data: card
         })
 }

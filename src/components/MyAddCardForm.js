@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { Button, Col, Form, Input, Row } from 'reactstrap'
 import { addLaneCard } from 'redux/lane/action';
+import uniqid from 'uniqid'
 
 const MyAddCardForm = (props) => {
 
@@ -11,11 +12,11 @@ const MyAddCardForm = (props) => {
 
   const onSubmit = (data) => {
 
-    data.id = props.laneId;
+    data.id = uniqid();
     console.log("data", data)
 
     props.onAdd(data)
-    dispatch(addLaneCard(props.lanesArray, data))
+    dispatch(addLaneCard(props.lanesArray, props.laneId, data))
 
   }
 
