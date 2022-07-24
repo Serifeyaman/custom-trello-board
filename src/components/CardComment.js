@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { Button, Card, CardBody, Col, Form, FormGroup, Input, Row } from 'reactstrap'
 import { myContext } from 'utility/MyContext';
@@ -11,6 +11,8 @@ const CardComment = () => {
     const context = useContext(myContext)
     const { register, reset, handleSubmit, formState: { errors } } = useForm();
 
+    const [commentObject, setCommentObject] = useState({ comments: context.cardInfo.comments, isDeleted: false })
+
     const onSubmit = (data) => {
         data.id = uniqid()
         var newArray = addComment(context.mylanesArray, context.cardInfo.id, data)
@@ -20,7 +22,8 @@ const CardComment = () => {
 
     const commentDelete = (array, card, comment) => {
         var newArray = deleteComment(array, card, comment)
-        context.setLanesArray(newArray)
+        context.setLanesArray(newArray[0])
+        setCommentObject({ comments: newArray[1].comments, isDeleted: !commentObject.isDeleted })
     }
 
     return (
@@ -46,8 +49,9 @@ const CardComment = () => {
             </Form>
 
             {
-                context.cardInfo.comments.map((item, key) => (
-                    <div key={key}>
+                commentObject.comments.map((item, key) => {
+                    console.log("item", item)
+                    return (<div key={key}>
 
                         <Card className='mb-1 mt-2' style={{ backgroundColor: "#9188b3" }}>
                             <CardBody>
@@ -61,8 +65,9 @@ const CardComment = () => {
                                 </Row>
                             </CardBody>
                         </Card>
-                    </div>
-                ))
+                    </div>)
+                }
+                )
             }
         </>
     )

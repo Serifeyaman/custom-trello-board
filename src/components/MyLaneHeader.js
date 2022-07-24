@@ -10,6 +10,7 @@ const MyLaneHeader = (props) => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const context = useContext(myContext)
     const [laneId, setLaneId] = useState()
+    const [deneme, setdeneme] = useState(false)
 
     const deleteLane = () => {
 
@@ -36,16 +37,20 @@ const MyLaneHeader = (props) => {
     return (
         <Form onSubmit={handleSubmit(onSubmit)}>
             <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-                <Input
-                    onClick={() => setLaneId(props.id)}
-                    className='gMefDG'
-                    type="text"
-                    defaultValue={props.title}
-                    name="title"
-                    style={{ fontSize: 13, fontWeight: 'bold', width: 150 }}
-                    innerRef={register({ required: false })}
-                    invalid={errors.label && true}
-                />
+                {!deneme ?
+                    <span onClick={() => setdeneme(true)} style={{ fontWeight: 'bold', fontSize: 13, width:'70%' }}>{props.title}</span>
+                    :
+                    <Input
+                        onClick={() => setLaneId(props.id)}
+                        className='gMefDG'
+                        type="text"
+                        defaultValue={props.title}
+                        name="title"
+                        style={{ fontSize: 13, fontWeight: 'bold', width: 150 }}
+                        innerRef={register({ required: false })}
+                        invalid={errors.label && true}
+                    />
+                }
                 <span style={{ fontWeight: '200', fontSize: 13 }}>{props.label}</span>
                 <X onClick={() => deleteLane()} style={{ cursor: 'pointer' }} color='black' size={15} />
                 <Button hidden id="myButton" type="submit" size='sm' outline color='success'>Kart Ekle</Button>

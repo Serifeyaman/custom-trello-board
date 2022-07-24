@@ -15,6 +15,7 @@ import MyLaneHeader from 'components/MyLaneHeader';
 import CardModal from 'components/CardModal';
 import CardInfoForm from 'components/CardInfoForm';
 import CardComment from 'components/CardComment';
+import MyLaneCard from 'components/MyLaneCard';
 
 const App = () => {
 
@@ -30,10 +31,9 @@ const App = () => {
     let findcard = findlane.cards.find(c => c.id === cardId)
     setCardInfo(findcard)
   }
-  console.log("kart Detay", cardInfo)
 
   return (
-    <myContext.Provider value={{ mylanesArray, setLanesArray, cardInfo }}>
+    <myContext.Provider value={{ mylanesArray, setLanesArray, cardInfo, setCardInfo }}>
       <Board
         onDataChange={() => console.log("laneArray", mylanesArray)}
         draggable

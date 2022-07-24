@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Button, Col, Form, FormGroup, Input, Label, Row } from 'reactstrap'
 import "assets/css/CardInfoForm.css"
 import { myContext } from 'utility/MyContext';
+import { updateLaneCardX } from 'services/LaneService';
 
 const CardInfoForm = () => {
 
@@ -11,6 +12,7 @@ const CardInfoForm = () => {
 
     const onSubmit = (data) => {
         console.log("dataaaa", data)
+        updateLaneCardX(context.mylanesArray, context.cardInfo.id, data)
     }
 
     return (

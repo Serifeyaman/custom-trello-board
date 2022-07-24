@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card, CardHeader, CardTitle, Input } from 'reactstrap'
-import "assets/css/MyLaneCard.css"
+// import "assets/css/MyLaneCard.css"
 
 const MyLaneCard = (props) => {
     const updateCard = (card) => {
