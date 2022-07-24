@@ -31,3 +31,21 @@ export const deleteLaneCardX = (lane, cardId) => {
     })
     return lane
 }
+
+export const addComment = (lane, cardId, data) => {
+    lane.map((item) => {
+        let findCard = item.cards.find(p => p.id === cardId)
+        findCard?.comments?.push(data)
+    })
+    return lane
+}
+
+export const deleteComment = (lane, cardId, commentId) => {
+    lane.map((item) => {
+        let findCard = item.cards.find(p => p.id === cardId)
+        let findComment = findCard.comments.find(p => p.id === commentId)
+        var index = findCard.comments.indexOf(findComment)
+        findCard.comments.splice(index, 1)
+    })
+    return lane
+}

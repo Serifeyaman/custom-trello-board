@@ -1,23 +1,24 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
 import { Button, Col, Form, Input, Row } from 'reactstrap'
-import { addLaneCard } from 'redux/lane/action';
+import { addLaneCardX } from 'services/LaneService';
 import uniqid from 'uniqid'
+import { myContext } from 'utility/MyContext';
 
 const MyAddCardForm = (props) => {
 
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const dispatch = useDispatch()
+  const context = useContext(myContext)
 
   const onSubmit = (data) => {
 
     data.id = uniqid();
-    console.log("data", data)
+    data.comments = []
 
     props.onAdd(data)
-    dispatch(addLaneCard(props.lanesArray, props.laneId, data))
 
+    var newArray = addLaneCardX(context.mylanesArray, props.laneId, data)
+    context.setLanesArray(newArray)
   }
 
   return (

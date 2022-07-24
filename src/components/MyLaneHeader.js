@@ -1,29 +1,31 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { X } from 'react-feather'
 import { useForm } from 'react-hook-form'
-import { useDispatch } from 'react-redux'
 import { Button, Form, Input } from 'reactstrap'
-import { updateLaneHeader } from 'redux/lane/action'
-import { deleteLaneX } from 'services/LaneService'
+import { deleteLaneX, updateLaneHeaderX } from 'services/LaneService'
+import { myContext } from 'utility/MyContext'
 
 const MyLaneHeader = (props) => {
 
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const context = useContext(myContext)
     const [laneId, setLaneId] = useState()
 
-    const dispatch = useDispatch()
-    const { register, handleSubmit, formState: { errors } } = useForm();
-
     const deleteLane = () => {
+
         props.onDelete()
-        dispatch(deleteLaneX(props.lanesArray, props.id))
+
+        var newArray = deleteLaneX(props.lanesArray, props.id)
+        context.setLanesArray(newArray)
     }
 
     const onSubmit = (data) => {
+
         if (laneId !== undefined) {
             data.id = laneId
 
             props.updateTitle(data.title)
-            dispatch(updateLaneHeader(props.lanesArray, data))
+            updateLaneHeaderX(props.lanesArray, data)
         }
     }
 
@@ -34,7 +36,6 @@ const MyLaneHeader = (props) => {
     return (
         <Form onSubmit={handleSubmit(onSubmit)}>
             <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-                {/* <span onDoubleClick={() => props.onDoubleClick} style={{ fontWeight: 'bold', fontSize: 15, width: "75%" }}>{props.title}</span> */}
                 <Input
                     onClick={() => setLaneId(props.id)}
                     className='gMefDG'
@@ -46,16 +47,6 @@ const MyLaneHeader = (props) => {
                     invalid={errors.label && true}
                 />
                 <span style={{ fontWeight: '200', fontSize: 13 }}>{props.label}</span>
-                {/* <Input
-                    onClick={() => setlanedata(props)}
-                    className='gMefDG'
-                    type="text"
-                    defaultValue={props.label}
-                    name="label"
-                    style={{ fontSize: 13, width: 70 }}
-                    innerRef={register({ required: false })}
-                    invalid={errors.label && true}
-                /> */}
                 <X onClick={() => deleteLane()} style={{ cursor: 'pointer' }} color='black' size={15} />
                 <Button hidden id="myButton" type="submit" size='sm' outline color='success'>Kart Ekle</Button>
             </div>

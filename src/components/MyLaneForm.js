@@ -1,13 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
 import { Button, Col, Form, Input, Row } from 'reactstrap'
-import { addLane } from 'redux/lane/action';
+import { addLaneX } from 'services/LaneService';
 import uniqid from 'uniqid'
+import { myContext } from 'utility/MyContext';
 
 const MyLaneForm = (props) => {
+
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const dispatch = useDispatch()
+    const context = useContext(myContext)
 
     const onSubmit = (data) => {
 
@@ -15,7 +16,9 @@ const MyLaneForm = (props) => {
         data.cards = []
 
         props.onAdd(data)
-        dispatch(addLane(props.lanesArray, data))
+
+        var newArray = addLaneX(props.lanesArray, data)
+        context.setLanesArray(newArray)
     }
     return (
         <div className=' smooth-dnd-container vertical '>
