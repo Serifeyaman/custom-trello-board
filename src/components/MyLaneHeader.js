@@ -10,12 +10,11 @@ const MyLaneHeader = (props) => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const context = useContext(myContext)
     const [laneId, setLaneId] = useState()
-    const [deneme, setdeneme] = useState(false)
+    const [isUpdate, setIsUpdate] = useState(false)
 
     const deleteLane = () => {
 
         props.onDelete()
-
         var newArray = deleteLaneX(props.lanesArray, props.id)
         context.setLanesArray(newArray)
     }
@@ -27,6 +26,7 @@ const MyLaneHeader = (props) => {
 
             props.updateTitle(data.title)
             updateLaneHeaderX(props.lanesArray, data)
+            setIsUpdate(!isUpdate)
         }
     }
 
@@ -37,8 +37,9 @@ const MyLaneHeader = (props) => {
     return (
         <Form onSubmit={handleSubmit(onSubmit)}>
             <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-                {!deneme ?
-                    <span onClick={() => setdeneme(true)} style={{ fontWeight: 'bold', fontSize: 13, width:'70%' }}>{props.title}</span>
+                {!isUpdate
+                    ?
+                    <span onClick={() => setIsUpdate(!isUpdate)} style={{ fontWeight: 'bold', fontSize: 13, width: '70%' }}>{props.title}</span>
                     :
                     <Input
                         onClick={() => setLaneId(props.id)}
