@@ -3,7 +3,7 @@ import Board from 'react-trello'
 import { Plus } from 'react-feather';
 
 import { myContext } from 'utility/MyContext';
-import { deleteLaneCardX } from 'services/LaneService';
+import { deleteLaneCardX, dragCardToLane } from 'services/LaneService';
 import { initialLanesArray } from 'constant/MyDatas';
 
 import { Button } from 'reactstrap';
@@ -32,6 +32,9 @@ const App = () => {
     setCardInfo(findcard)
   }
 
+  const [dragCardId, setDragCardId] = useState()
+
+
   return (
     <myContext.Provider value={{ mylanesArray, setLanesArray, cardInfo, setCardInfo }}>
       <Board
@@ -43,14 +46,13 @@ const App = () => {
         editLaneTitle
         components={{
           // GlobalStyle: MyGlobalStyle, 
+          // Card: (props) => MyLaneCard({...props}),
           NewLaneSection: (props) => <Button onClick={() => props.onClick()} color='secondary' size='md' style={{ fontSize: 14, backgroundColor: '#306073', border: 'none', margin: 5 }}> <Plus size={15} /> Liste Ekle</Button>,
           NewLaneForm: (props) => MyLaneForm({ ...props, lanesArray: mylanesArray }),
           LaneHeader: (props) => MyLaneHeader({ ...props, lanesArray: mylanesArray }),
 
           AddCardLink: (props) => MyAddCardLink({ ...props }),
           NewCardForm: (props) => MyAddCardForm({ ...props, lanesArray: mylanesArray }),
-          // Card: (props) => MyLaneCard({...props}),
-
         }}
         data={{ lanes: mylanesArray }}
         laneStyle={{ backgroundColor: 'rgba(176, 126, 204, 0.4)', boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px" }} // büyük kart css
@@ -60,10 +62,11 @@ const App = () => {
           background: "linear-gradient(142deg, rgba(126,196,204,1) 0%, rgba(176,126,204,0.7189250700280112) 97%)",
           overflowWrap: 'break-word',
         }}
+
         onCardDelete={(e) => deleteLaneCardX(mylanesArray, e)}
         onCardClick={(e) => cardDetail(mylanesArray, e)}
-      // onCardMoveAcrossLanes={(e)=>console.log("e", e)}
-      // handleDragEnd={(e) => console.log("handleDragEnd e",e)}
+        onCardMoveAcrossLanes={(e) => dragCardToLane(mylanesArray, dragCardId, e)}
+        handleLaneDragStart={(e) => setDragCardId(e)}
       />
 
       <CardModal title="Kart Detay" size="lg" modalOpen={modalOpen} showModal={showModal} >

@@ -9,7 +9,6 @@ const CommentUpdateForm = ({ commentDetail, setIsUpdate, isUpdate, setCommentObj
     const { register, reset, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = (data) => {
-        console.log("data", data)
         data.id = commentDetail?.id
         var newArray = updateComment(context.mylanesArray, context.cardInfo.id, data)
         context.setLanesArray(newArray)

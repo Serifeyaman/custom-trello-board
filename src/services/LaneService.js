@@ -39,13 +39,13 @@ export const deleteLaneCardX = (lane, cardId) => {
 
 //kart güncelleme
 export const updateLaneCardX = (lane, cardId, data) => {
-    lane.map((item) => {
-        let findCard = item.cards.find(p => p.id === cardId)
-        var index = item.cards.indexOf(findCard)
-        console.log("kaderrr", findCard)
-        item.cards.splice(index, 1)
-        item.cards[index] = data
-    })
+
+    var findLaneArray = lane.filter(p => p.cards.find(q => q.id === cardId))
+    var findCard = findLaneArray[0].cards.find(q => q.id === cardId)
+    var index = findLaneArray[0].cards.indexOf(findCard)
+    findLaneArray[0].cards[index] = data
+
+    return [lane, findCard]
 }
 
 //karta yorum ekleme
@@ -67,7 +67,16 @@ export const deleteComment = (lane, cardId, commentId) => {
     return [lane, findCard]
 }
 
-//yroum güncelleme
+//kart taşıma
+export const dragCardToLane = (lane, cardId, newLane) => {
+    var findLaneArray = lane.find(p => p.cards.find(q => q.id === cardId))
+    var findCard = findLaneArray.cards.find(q => q.id === cardId)
+    var oldLaneCardIndex = findLaneArray.cards.indexOf(findCard)
+    lane[newLane].cards.push(findCard)  //yeni listeye ekledi
+    findLaneArray.cards.splice(oldLaneCardIndex, 1)  //eski listeden sildi
+}
+
+//yorum güncelleme
 export const updateComment = (lane, cardId, data) => {
     var findLaneArray = lane.filter(p => p.cards.find(q => q.id === cardId))
     let findCard = findLaneArray[0].cards.find(p => p.id === cardId)
