@@ -49,10 +49,8 @@ const CardComment = () => {
             </Form>
 
             {
-                commentObject.comments.map((item, key) => {
-                    console.log("item", item)
-                    return (<div key={key}>
-
+                commentObject.comments.map((item, key) => (
+                    <div key={key}>
                         <Card className='mb-1 mt-2' style={{ backgroundColor: "#9188b3" }}>
                             <CardBody>
                                 <Row style={{ alignItems: 'center' }}>
@@ -65,9 +63,8 @@ const CardComment = () => {
                                 </Row>
                             </CardBody>
                         </Card>
-                    </div>)
-                }
-                )
+                    </div>
+                ))
             }
         </>
     )

@@ -66,3 +66,13 @@ export const deleteComment = (lane, cardId, commentId) => {
     findCard.comments.splice(index, 1)
     return [lane, findCard]
 }
+
+//yroum güncelleme
+export const updateComment = (lane, cardId, data) => {
+    var findLaneArray = lane.filter(p => p.cards.find(q => q.id === cardId))
+    let findCard = findLaneArray[0].cards.find(p => p.id === cardId)
+    let findComment = findCard.comments.find(p => p.id === data.id)
+    var index = findCard.comments.indexOf(findComment)
+    findCard.comments[index] = data
+    return [lane, findCard]
+}
