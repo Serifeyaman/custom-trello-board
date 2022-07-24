@@ -60,7 +60,7 @@ export const addComment = (lane, cardId, data) => {
 //kartan yorum silme
 export const deleteComment = (lane, cardId, commentId) => {
     var findLaneArray = lane.filter(p => p.cards.find(q => q.id === cardId))
-    let findCard = findLaneArray[0].cards.find(p => p.id === cardId)
+    let findCard = findLaneArray[0]?.cards?.find(p => p.id === cardId)
     let findComment = findCard.comments.find(p => p.id === commentId)
     var index = findCard.comments.indexOf(findComment)
     findCard.comments.splice(index, 1)
