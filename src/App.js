@@ -24,6 +24,7 @@ const App = () => {
   const [modalOpen, setModalOpen] = useState(false)
   const showModal = () => setModalOpen(!modalOpen);
   const [cardInfo, setCardInfo] = useState({})
+  const [dragCardId, setDragCardId] = useState()
 
   const cardDetail = (lane, cardId) => {
     showModal()
@@ -31,9 +32,6 @@ const App = () => {
     let findcard = findlane.cards.find(c => c.id === cardId)
     setCardInfo(findcard)
   }
-
-  const [dragCardId, setDragCardId] = useState()
-
 
   return (
     <myContext.Provider value={{ mylanesArray, setLanesArray, cardInfo, setCardInfo }}>

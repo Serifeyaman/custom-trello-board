@@ -13,10 +13,12 @@ const CardComment = () => {
 
     const [commentObject, setCommentObject] = useState({ comments: context.cardInfo.comments, isDeleted: false })
 
+
     const onSubmit = (data) => {
         data.id = uniqid()
         var newArray = addComment(context.mylanesArray, context.cardInfo.id, data)
         context.setLanesArray(newArray)
+        setCommentObject({ comments: context.cardInfo.comments, isDeleted: !commentObject.isDeleted })
         reset()
     }
 

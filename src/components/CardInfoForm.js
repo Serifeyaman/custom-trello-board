@@ -11,8 +11,10 @@ const CardInfoForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = (data) => {
-        console.log("kart güncelleme", data)
-        updateLaneCardX(context.mylanesArray, context.cardInfo.id, data)
+        data.id = context.cardInfo.id
+        data.comments = context.cardInfo.comments
+        var newArray = updateLaneCardX(context.mylanesArray, context.cardInfo.id, data)
+        context.setLanesArray(newArray[0])
     }
 
     return (
