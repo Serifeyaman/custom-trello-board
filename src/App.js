@@ -3,7 +3,7 @@ import Board from 'react-trello'
 import { Plus } from 'react-feather';
 
 import { myContext } from 'utility/MyContext';
-import { deleteLaneCardX, dragCardToLane } from 'services/LaneService';
+import { deleteLaneCardX } from 'services/LaneService';
 import { initialLanesArray } from 'constant/MyDatas';
 
 import { Button } from 'reactstrap';
@@ -15,7 +15,6 @@ import MyLaneHeader from 'components/MyLaneHeader';
 import CardModal from 'components/CardModal';
 import CardInfoForm from 'components/CardInfoForm';
 import CardComment from 'components/CardComment';
-import MyLaneCard from 'components/MyLaneCard';
 
 const App = () => {
 
@@ -24,7 +23,7 @@ const App = () => {
   const [modalOpen, setModalOpen] = useState(false)
   const showModal = () => setModalOpen(!modalOpen);
   const [cardInfo, setCardInfo] = useState({})
-  const [dragCardId, setDragCardId] = useState()
+  // const [dragCardId, setDragCardId] = useState()
 
   const cardDetail = (lane, cardId) => {
     showModal()
@@ -36,10 +35,10 @@ const App = () => {
   return (
     <myContext.Provider value={{ mylanesArray, setLanesArray, cardInfo, setCardInfo }}>
       <Board
-        onDataChange={() => console.log("laneArray", mylanesArray)}
+        // onDataChange={() => console.log("laneArray", mylanesArray)}
         draggable
         editable
-        cardDraggable
+        cardDraggable={false}
         canAddLanes
         editLaneTitle
         components={{
@@ -63,12 +62,12 @@ const App = () => {
 
         onCardDelete={(e) => deleteLaneCardX(mylanesArray, e)}
         onCardClick={(e) => cardDetail(mylanesArray, e)}
-        onCardMoveAcrossLanes={(e) => dragCardToLane(mylanesArray, dragCardId, e)}
-        handleLaneDragStart={(e) => setDragCardId(e)}
+      // onCardMoveAcrossLanes={(e) => dragCardToLane(mylanesArray, dragCardId, e)}
+      // handleLaneDragStart={(e) => setDragCardId(e)}
       />
 
       <CardModal title="Kart Detay" size="lg" modalOpen={modalOpen} showModal={showModal} >
-        <CardInfoForm />
+        <CardInfoForm showModal={showModal} />
         <h6 style={{ color: '#ced4da' }}>Yorum Ekle</h6>
         <CardComment />
       </CardModal>

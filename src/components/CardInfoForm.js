@@ -5,7 +5,7 @@ import "assets/css/CardInfoForm.css"
 import { myContext } from 'utility/MyContext';
 import { updateLaneCardX } from 'services/LaneService';
 
-const CardInfoForm = () => {
+const CardInfoForm = ({showModal}) => {
 
     const context = useContext(myContext)
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -15,6 +15,7 @@ const CardInfoForm = () => {
         data.comments = context.cardInfo.comments
         var newArray = updateLaneCardX(context.mylanesArray, context.cardInfo.id, data)
         context.setLanesArray(newArray[0])
+        showModal()
     }
 
     return (
