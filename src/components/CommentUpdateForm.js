@@ -6,7 +6,7 @@ import { myContext } from 'utility/MyContext';
 
 const CommentUpdateForm = ({ commentDetail, setIsUpdate, isUpdate, setCommentObject, commentObject }) => {
     const context = useContext(myContext)
-    const { register, reset, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = (data) => {
         data.id = commentDetail?.id
